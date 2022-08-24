@@ -1,0 +1,14 @@
+.tooltip-popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+  position: relative;
+  width: 430px;
+  height: 330px;
+  align-self: start;
+  grid-row-start: 2;
+  grid-column-start: 1;
+  margin: 0;
+}

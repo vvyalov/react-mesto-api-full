@@ -1,0 +1,12 @@
+.photo-popup {
+  justify-self: center;
+  justify-content: center;
+  align-content: center;
+  margin: 0 0 0 32px;  
+}
+
+@media screen and (max-width: 767px) {
+.photo-popup {
+  margin: 0;
+  }
+}

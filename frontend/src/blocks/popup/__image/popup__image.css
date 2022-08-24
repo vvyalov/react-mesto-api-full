@@ -1,0 +1,9 @@
+.popup__image {
+max-width: 75vw;
+max-height: 75vh;
+align-self: start;
+grid-row-start: 2;
+grid-column-start: 1;
+object-fit: cover;
+margin: 0;
+}

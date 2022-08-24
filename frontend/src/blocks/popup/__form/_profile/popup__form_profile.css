@@ -1,0 +1,13 @@
+.popup__form_profile {
+  width: 430px;
+  height: 330px;
+}
+
+
+@media screen and (max-width: 767px) {
+  .popup__form {
+    max-width: 282px;
+    max-height: 322px;
+    margin: 0;
+  }
+}
