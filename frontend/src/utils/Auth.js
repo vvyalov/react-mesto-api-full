@@ -49,7 +49,7 @@ class Auth {
 };
 
 export const auth = new Auth({
-  baseUrl: 'https://auth.nomoreparties.co',
+  baseUrl: 'https://api.vyalov.students.nomoredomains.sbs',
   headers: {
     'Content-Type': 'application/json'
   }
