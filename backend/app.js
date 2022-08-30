@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const bodyParser = require('body-parser');
 const { errors, celebrate, Joi } = require('celebrate');
-const cookieParser = require('cookie-parser');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const UserRouter = require('./routes/users');
 const CardRouter = require('./routes/cards');
@@ -19,8 +17,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
 
-app.use(cookieParser());
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.get('/crash-test', () => {
   setTimeout(() => {
