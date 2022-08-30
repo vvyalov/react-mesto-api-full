@@ -31,6 +31,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [login, setLogin] = React.useState(false)
   const [email, setEmail] = React.useState('');
+  const [token, setToken] = React.useState('');
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -91,7 +92,7 @@ function App() {
   }
 
   function handleUpdateUser(data) {
-    api.setUserInfo(data)
+    api.setUserInfo(data, token)
       .then((data) => {
         setCurrentUser(data)
         closeAllPopups()
@@ -109,7 +110,7 @@ function App() {
   }
 
   function handleAddPlace(data) {
-    api.getInitialNewCard(data)
+    api.getInitialNewCard(data, token)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups()
@@ -117,10 +118,10 @@ function App() {
       .catch(err => console.log(err));
   }
 
-  function handleCardLike(card) {
+  function handleCardLike(card, token) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
-    api.changeLikeCardStatus(card._id, isLiked)
+    api.changeLikeCardStatus(card._id, isLiked, token)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
@@ -128,7 +129,7 @@ function App() {
   };
 
   function handleCardDelete(card) {
-    api.deleteCard(card._id)
+    api.deleteCard(card._id, token)
       .then(() => {
         const filteredCards = cards.filter(filteredCard => filteredCard !== card)
         setCards(filteredCards)
@@ -173,6 +174,7 @@ function App() {
           setEmail(res.data.email);
           setLoggedIn(true);
           history.push('/')
+          setToken(jwt)
         })
         .catch(err => console.log(err))
     }, [history])
