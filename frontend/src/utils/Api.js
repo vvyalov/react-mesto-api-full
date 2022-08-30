@@ -95,9 +95,8 @@ class Api {
 };
 
 export const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
+  baseUrl: 'https://api.vyalov.students.nomoredomains.sbs',
   headers: {
-    authorization: '26eb0ee4-0eb7-4b00-b983-4f5e5dfe8770',
     'Content-Type': 'application/json'
   }
 });
