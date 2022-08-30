@@ -14,26 +14,32 @@ class Api {
     }
   };
 
-  getInitialCards() {
+  getInitialCards(token) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
-      headers: this._headers
+      headers:{ 
+        ...this._headers,
+        authorization: `Bearer ${token}`}
     })
       .then(this._checkResponse)
   }
 
-  getUserInfo() {
+  getUserInfo(token) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers: this._headers,
+      headers:{ 
+        ...this._headers,
+        authorization: `Bearer ${token}`}
     })
       .then(this._checkResponse)
   }
 
-  setUserInfo(data) {
+  setUserInfo(data, token) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers:{ 
+        ...this._headers,
+        authorization: `Bearer ${token}`},
       body: JSON.stringify({
         name: data.name,
         about: data.about
@@ -41,20 +47,24 @@ class Api {
     }).then(this._checkResponse)
   }
 
-  newAvatar(link) {
+  newAvatar(link, token) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers:{ 
+        ...this._headers,
+        authorization: `Bearer ${token}`},
       body: JSON.stringify({
         avatar: link
       })
     }).then(this._checkResponse)
   }
 
-  getInitialNewCard(data) {
+  getInitialNewCard(data, token) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers:{ 
+        ...this._headers,
+        authorization: `Bearer ${token}`},
       body: JSON.stringify({
         name: data.name,
         link: data.link
@@ -63,10 +73,12 @@ class Api {
   }
 
 
-  deleteCard(id) {
+  deleteCard(id, token) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
-      headers: this._headers
+      headers:{ 
+        ...this._headers,
+        authorization: `Bearer ${token}`}
     }).then(this._checkResponse)
   }
 
@@ -79,17 +91,21 @@ class Api {
     }
   }
 
-  addLike(id) {
+  addLike(id, token) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
-      headers: this._headers
+      headers:{ 
+        ...this._headers,
+        authorization: `Bearer ${token}`}
     }).then(this._checkResponse)
   }
 
-  removeLike(id) {
+  removeLike(id, token) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
-      headers: this._headers
+      headers:{ 
+        ...this._headers,
+        authorization: `Bearer ${token}`}
     }).then(this._checkResponse)
   }
 };
