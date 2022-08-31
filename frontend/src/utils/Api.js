@@ -14,32 +14,26 @@ class Api {
     }
   };
 
-  getInitialCards(token) {
+  getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
-      headers:{ 
-        ...this._headers,
-        authorization: `Bearer ${token}`}
+      headers: this._headers
     })
       .then(this._checkResponse)
   }
 
-  getUserInfo(token) {
+  getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers:{ 
-        ...this._headers,
-        authorization: `Bearer ${token}`}
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
 
-  setUserInfo(data, token) {
+  setUserInfo(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      headers:{ 
-        ...this._headers,
-        authorization: `Bearer ${token}`},
+      headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         about: data.about
@@ -47,24 +41,20 @@ class Api {
     }).then(this._checkResponse)
   }
 
-  newAvatar(link, token) {
+  newAvatar(link) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      headers:{ 
-        ...this._headers,
-        authorization: `Bearer ${token}`},
+      headers: this._headers,
       body: JSON.stringify({
         avatar: link
       })
     }).then(this._checkResponse)
   }
 
-  getInitialNewCard(data, token) {
+  getInitialNewCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      headers:{ 
-        ...this._headers,
-        authorization: `Bearer ${token}`},
+      headers: this._headers,
       body: JSON.stringify({
         name: data.name,
         link: data.link
@@ -73,45 +63,39 @@ class Api {
   }
 
 
-  deleteCard(id, token) {
+  deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
-      headers:{ 
-        ...this._headers,
-        authorization: `Bearer ${token}`}
+      headers: this._headers
     }).then(this._checkResponse)
   }
 
-  changeLikeCardStatus(id, isLiked, token) {
+  changeLikeCardStatus(id, isLiked) {
     if (isLiked) {
-      return this.removeLike(id, token)
+      return this.removeLike(id)
     }
     else {
-      return this.addLike(id, token)
+      return this.addLike(id)
     }
   }
 
-  addLike(id, token) {
+  addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
-      headers:{ 
-        ...this._headers,
-        authorization: `Bearer ${token}`}
+      headers: this._headers
     }).then(this._checkResponse)
   }
 
-  removeLike(id, token) {
+  removeLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
-      headers:{ 
-        ...this._headers,
-        authorization: `Bearer ${token}`}
+      headers: this._headers
     }).then(this._checkResponse)
   }
 };
 
 export const api = new Api({
-  baseUrl: 'https://api.vyalov.students.nomoredomains.sbs',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
   headers: {
     'Content-Type': 'application/json'
   }

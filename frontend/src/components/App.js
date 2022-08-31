@@ -31,7 +31,6 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [login, setLogin] = React.useState(false)
   const [email, setEmail] = React.useState('');
-  const [token, setToken] = React.useState('');
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -92,7 +91,7 @@ function App() {
   }
 
   function handleUpdateUser(data) {
-    api.setUserInfo(data, token)
+    api.setUserInfo(data)
       .then((data) => {
         setCurrentUser(data)
         closeAllPopups()
@@ -110,7 +109,7 @@ function App() {
   }
 
   function handleAddPlace(data) {
-    api.getInitialNewCard(data, token)
+    api.getInitialNewCard(data)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups()
@@ -121,7 +120,7 @@ function App() {
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
-    api.changeLikeCardStatus(card._id, isLiked, token)
+    api.changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
       })
@@ -129,7 +128,7 @@ function App() {
   };
 
   function handleCardDelete(card) {
-    api.deleteCard(card._id, token)
+    api.deleteCard(card._id)
       .then(() => {
         const filteredCards = cards.filter(filteredCard => filteredCard !== card)
         setCards(filteredCards)
@@ -171,9 +170,9 @@ function App() {
       const jwt = localStorage.getItem('jwt');
       auth.checkToken(jwt)
         .then((res) => {
+          setEmail(res.data.email);
           setLoggedIn(true);
           history.push('/')
-          setToken(jwt)
         })
         .catch(err => console.log(err))
     }, [history])
