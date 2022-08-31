@@ -1,8 +1,8 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const express = require('express');
 const { errors, celebrate, Joi } = require('celebrate');
 const cookieParser = require('cookie-parser');
-const dotenv = require('dotenv');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const UserRouter = require('./routes/users');
 const CardRouter = require('./routes/cards');
@@ -19,7 +19,6 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
 
-app.use(dotenv.config());
 app.use(cookieParser());
 app.use(express.json());
 
