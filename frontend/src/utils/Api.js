@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 class Api {
   constructor(options) {
     this._baseUrl = options.baseUrl
@@ -17,6 +18,7 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
+      credentials: include,
       headers: this._headers
     })
       .then(this._checkResponse)
@@ -25,6 +27,7 @@ class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
+      credentials: include,
       headers: this._headers,
     })
       .then(this._checkResponse)
@@ -33,6 +36,7 @@ class Api {
   setUserInfo(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
+      credentials: include,
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
@@ -44,6 +48,7 @@ class Api {
   newAvatar(link) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
+      credentials: include,
       headers: this._headers,
       body: JSON.stringify({
         avatar: link
@@ -54,6 +59,7 @@ class Api {
   getInitialNewCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
+      credentials: include,
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
@@ -66,6 +72,7 @@ class Api {
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
+      credentials: include,
       headers: this._headers
     }).then(this._checkResponse)
   }
@@ -82,6 +89,7 @@ class Api {
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "PUT",
+      credentials: include,
       headers: this._headers
     }).then(this._checkResponse)
   }
@@ -89,6 +97,7 @@ class Api {
   removeLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: "DELETE",
+      credentials: include,
       headers: this._headers
     }).then(this._checkResponse)
   }
