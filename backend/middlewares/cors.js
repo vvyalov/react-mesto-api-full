@@ -1,8 +1,6 @@
 const allowedCors = [
   'https://vyalov.students.nomoredomains.sbs',
   'http://vyalov.students.nomoredomains.sbs',
-  'https://api.vyalov.students.nomoredomains.sbs/users/me',
-  'https://api.vyalov.students.nomoredomains.sbs/signup',
   'https://localhost:3000',
 ];
 
