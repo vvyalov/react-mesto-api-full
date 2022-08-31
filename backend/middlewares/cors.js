@@ -1,7 +1,7 @@
 const allowedCors = [
   'https://vyalov.students.nomoredomains.sbs',
   'http://vyalov.students.nomoredomains.sbs',
-  'localhost:3000',
+  'https://localhost:3000',
 ];
 
 const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
