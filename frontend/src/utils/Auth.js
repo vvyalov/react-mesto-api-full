@@ -17,6 +17,7 @@ class Auth {
   registration(password, email) {
     return fetch(`${this._baseUrl}/signup`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         password: password,
@@ -29,6 +30,7 @@ class Auth {
   authorize(password, email) {
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
+      credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
         password,
@@ -41,7 +43,8 @@ class Auth {
   checkToken(jwt) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      headers: { ...this.headers, "Authorization": `Bearer ${jwt}` }
+      credentials: 'include',
+      headers: this._headers,
     })
       .then(this._checkResponse)
   }
