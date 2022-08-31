@@ -103,7 +103,7 @@ class Api {
 };
 
 export const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
+  baseUrl: 'https://vyalov.students.nomoredomains.sbs',
   headers: {
     'Content-Type': 'application/json'
   }
