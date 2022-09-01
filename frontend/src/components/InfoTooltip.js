@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import notRegistration from "../images/Bad.svg"
 import goodRegistration from '../images/Good.svg'
 
