@@ -6,7 +6,7 @@ function Header({ loggedIn, email, logOut }) {
   const location = useLocation()
   return (
     <header className='header'>
-      <a href="#"><img src={headerLogo} alt="логотип" className="header__logo" /></a>
+      <a href="/"><img src={headerLogo} alt="логотип" className="header__logo" /></a>
       <div className='header__entrance'>
         {loggedIn &&
           <>
