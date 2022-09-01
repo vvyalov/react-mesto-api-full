@@ -11,7 +11,7 @@ const UserRouter = require('./routes/users');
 const CardRouter = require('./routes/cards');
 const { newUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
-// const allowedCors = require('./middlewares/allowedCors');
+const allowedCors = require('./middlewares/allowedCors');
 const NotFoundError = require('./errors/not-found-error');
 
 const { PORT = 3000 } = process.env;
@@ -21,7 +21,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
 });
 
-app.use(cors());
+app.use(cors(allowedCors));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
