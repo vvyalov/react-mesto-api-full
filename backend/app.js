@@ -12,6 +12,7 @@ const { newUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const allowedCors = require('./middlewares/allowedCors');
 const NotFoundError = require('./errors/not-found-error');
+const validateURL = require('./utils/validateURL');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -49,7 +50,7 @@ app.post(
     body: Joi.object().keys({
       name: Joi.string().min(2).max(30),
       about: Joi.string().min(2).max(30),
-      avatar: Joi.string().pattern(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)/),
+      avatar: Joi.string().pattern(validateURL),
       email: Joi.string().required().email(),
       password: Joi.string().required(),
     }),
