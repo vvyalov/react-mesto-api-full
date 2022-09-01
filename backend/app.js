@@ -12,7 +12,7 @@ const CardRouter = require('./routes/cards');
 const { newUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/not-found-error');
-const corsOrogin = require('./middlewares/corsOrogin');
+const allowedCors = require('./middlewares/allowedCors');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cors(corsOrogin));
+app.use(cors(allowedCors));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
