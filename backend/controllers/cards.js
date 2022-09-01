@@ -11,7 +11,7 @@ const getCards = (req, res, next) => {
 
 const newCard = (req, res, next) => {
   const { name, link } = req.body;
-  Card.create({ name, link, owner: req.user._id })
+  Card.create({ name, link, owner: req.user.payload })
     .then((card) => res.status(200).send(card))
     .catch((err) => {
       if (err.name === 'ValidationError') {
@@ -29,10 +29,10 @@ function deleteCard(req, res, next) {
       if (!card) {
         throw new NotFoundError('Указанный _id не найден');
       }
-      if (!card.owner.equals(req.user._id)) {
+      if (!card.owner.equals(req.user.payload)) {
         throw new AccessError('У пользователя нет прав на удаление карточки');
       }
-      Card.findByIdAndRemove(card._id)
+      Card.findByIdAndRemove(card.payload)
         .then(() => {
           res.send(card);
         })
@@ -50,7 +50,7 @@ function deleteCard(req, res, next) {
 const likeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
     req.params.cardId,
-    { $addToSet: { likes: req.user._id } },
+    { $addToSet: { likes: req.user.payload } },
     { new: true },
   )
     .then((card) => {
@@ -71,7 +71,7 @@ const likeCard = (req, res, next) => {
 const dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
     req.params.cardId,
-    { $pull: { likes: req.user._id } },
+    { $pull: { likes: req.user.payload } },
     { new: true },
   )
     .then((card) => {
