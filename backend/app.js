@@ -12,7 +12,7 @@ const CardRouter = require('./routes/cards');
 const { newUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const NotFoundError = require('./errors/not-found-error');
-const corsOrogin = require('./middlewares/corsOrogin');
+const corsOrogin = require('./middlewares/cors');
 
 const { PORT = 3000 } = process.env;
 const app = express();
