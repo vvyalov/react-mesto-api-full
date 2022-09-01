@@ -6,7 +6,7 @@ const { errors, celebrate, Joi } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-// const validateURL = require('./utils/validateURL');
+const validateURL = require('./utils/validateURL');
 const UserRouter = require('./routes/users');
 const CardRouter = require('./routes/cards');
 const { newUser, login } = require('./controllers/users');
@@ -51,7 +51,7 @@ app.post(
     body: Joi.object().keys({
       name: Joi.string().min(2).max(30),
       about: Joi.string().min(2).max(30),
-      avatar: Joi.string().pattern(),
+      avatar: Joi.string().pattern(validateURL),
       email: Joi.string().required().email(),
       password: Joi.string().required(),
     }),

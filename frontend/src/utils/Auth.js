@@ -54,6 +54,7 @@ class Auth {
 export const auth = new Auth({
   baseUrl: 'https://api.vyalov.students.nomoredomains.sbs',
   headers: {
+    'Accept': 'application/json',
     'Content-Type': 'application/json'
   }
 });
