@@ -44,15 +44,13 @@ class Api {
     }).then(this._checkResponse)
   }
 
-  newAvatar(data) {
+  newAvatar(link) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       credentials: 'include',
       headers: this._headers,
       body: JSON.stringify({
-        name: data.name,
-        about: data.about,
-        avatar: data.link
+        avatar: link
       })
     }).then(this._checkResponse)
   }

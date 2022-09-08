@@ -8,9 +8,11 @@ module.exports = (req, res, next) => {
 
   if (!token) {
     next(new AuthError('Необходима авторизация'));
+    return;
   }
   let payload;
 
+  // файл env создан по заданию на сервере
   try {
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
   } catch (err) {
