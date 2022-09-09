@@ -12,9 +12,9 @@ module.exports = (req, res, next) => {
   }
   let payload;
 
-  // файл env создан по заданию на сервере
+  // по новой создал файл env на сервере и настроил
   try {
-    payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret');
+    payload = jwt.verify(token, NODE_ENV !== 'production' ? 'test-secret-word' : JWT_SECRET);
   } catch (err) {
     next(new AuthError('Необходима авторизация'));
     return;
