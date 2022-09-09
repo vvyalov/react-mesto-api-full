@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const AuthError = require('../errors/auth-error');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
-console.log(JWT_SECRET);
 
 module.exports = (req, res, next) => {
   const token = req.cookies.jwt;
@@ -13,7 +12,7 @@ module.exports = (req, res, next) => {
   }
   let payload;
 
-  // по новой создал файл env на сервере и настроил
+  // по новой создал файл env на сервере и настроил, тест показал что ключ берется из env
   try {
     payload = jwt.verify(token, NODE_ENV !== 'production' ? 'test-secret-word' : JWT_SECRET);
   } catch (err) {
